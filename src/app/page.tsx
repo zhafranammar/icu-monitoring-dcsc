@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { LogIn, Activity } from "lucide-react";
+import { LogIn } from "lucide-react";
 
-export default function LoginSIRS() {
+export default function LoginPage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -31,17 +32,23 @@ export default function LoginSIRS() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="bg-white p-8 rounded-2xl shadow-sm w-full max-w-sm border border-gray-100">
         
-        {/* Header / Logo */}
         <div className="flex items-center gap-3 mb-8">
-          <div className="bg-emerald-600 p-2.5 rounded-xl flex items-center justify-center">
-            <Activity className="text-white w-6 h-6" />
+          <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+            <Image
+              src="/icuq.png"
+              alt="ICU-Q logo"
+              width={38}
+              height={38}
+              className="h-9 w-9 scale-125 object-contain"
+              priority
+            />
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-900 tracking-tight">
-              SIRS UGM {/* [cite: 368] */}
+              ICU-Q
             </h1>
             <p className="text-xs text-gray-500 font-medium">
-              Sistem Informasi Rumah Sakit {/* [cite: 369] */}
+              ICU Queue Intelligence
             </p>
           </div>
         </div>
@@ -52,7 +59,7 @@ export default function LoginSIRS() {
           {/* ID Petugas / Username */}
           <div className="space-y-1.5">
             <label className="block text-sm font-medium text-gray-600">
-              ID Petugas / Username {/* [cite: 370] */}
+              Staff ID / Username
             </label>
             <input
               type="text"
@@ -67,7 +74,7 @@ export default function LoginSIRS() {
           {/* Kata sandi */}
           <div className="space-y-1.5">
             <label className="block text-sm font-medium text-gray-600">
-              Kata sandi {/* [cite: 372] */}
+              Password
             </label>
             <input
               type="password"
@@ -82,7 +89,7 @@ export default function LoginSIRS() {
           {/* Unit / Poliklinik */}
           <div className="space-y-1.5">
             <label className="block text-sm font-medium text-gray-600">
-              Unit / Poliklinik {/*  */}
+              Unit
             </label>
             <input
               type="text"
@@ -101,14 +108,14 @@ export default function LoginSIRS() {
             className="w-full bg-emerald-600 text-white py-3.5 rounded-xl hover:bg-emerald-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed mt-2 flex items-center justify-center gap-2 font-semibold text-sm"
           >
             <LogIn className="w-4 h-4" />
-            {loading ? "Memproses..." : "Masuk ke Sistem"} {/* [cite: 374] */}
+            {loading ? "Signing in..." : "Sign in to ICU-Q"}
           </button>
         </form>
 
         {/* Footer Text */}
         <div className="mt-6 text-center">
           <p className="text-xs text-gray-400">
-            Gunakan akun yang diberikan oleh Admin Sistem RS {/* [cite: 375] */}
+            Use the account provided by your ICU-Q administrator.
           </p>
         </div>
         

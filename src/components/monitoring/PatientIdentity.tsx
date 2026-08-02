@@ -2,7 +2,7 @@ interface PatientIdentityProps {
   data: {
     medicalRecord: string;
     name: string;
-    age: number;
+    age: number | string;
     gender: string;
     bloodType: string;
     birthDate: string;
@@ -10,6 +10,12 @@ interface PatientIdentityProps {
     room: string;
     doctor: string;
     admissionDate: string;
+    nik?: string;
+    payment?: string;
+    phone?: string;
+    familyName?: string;
+    relationship?: string;
+    source?: string;
   };
 }
 
@@ -57,7 +63,7 @@ export default function PatientIdentity({
           </p>
 
           <p className="font-medium text-slate-800">
-            {data.age} Years
+            {data.age === "-" ? "-" : `${data.age} Years`}
           </p>
         </div>
 
@@ -69,6 +75,17 @@ export default function PatientIdentity({
 
           <p className="font-medium text-slate-800">
             {data.gender}
+          </p>
+        </div>
+
+
+        <div>
+          <p className="text-sm text-slate-500">
+            National ID
+          </p>
+
+          <p className="font-medium text-slate-800">
+            {data.nik || "-"}
           </p>
         </div>
 
@@ -108,6 +125,17 @@ export default function PatientIdentity({
 
         <div>
           <p className="text-sm text-slate-500">
+            Payment
+          </p>
+
+          <p className="font-medium text-slate-800">
+            {data.payment || "-"}
+          </p>
+        </div>
+
+
+        <div>
+          <p className="text-sm text-slate-500">
             Doctor
           </p>
 
@@ -130,11 +158,35 @@ export default function PatientIdentity({
 
         <div>
           <p className="text-sm text-slate-500">
+            Admission Source
+          </p>
+
+          <p className="font-medium text-slate-800">
+            {data.source || "-"}
+          </p>
+        </div>
+
+
+        <div>
+          <p className="text-sm text-slate-500">
             Address
           </p>
 
           <p className="font-medium text-slate-800">
             {data.address}
+          </p>
+        </div>
+
+
+        <div>
+          <p className="text-sm text-slate-500">
+            Family Contact
+          </p>
+
+          <p className="font-medium text-slate-800">
+            {[data.familyName, data.relationship, data.phone]
+              .filter(Boolean)
+              .join(" / ") || "-"}
           </p>
         </div>
 

@@ -1,10 +1,16 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { FiBell, FiSettings } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [sessionText, setSessionText] = useState("Loading shift...");
+
+  useEffect(() => {
+    setSessionText(getCurrentSession());
+  }, []);
 
   const pageInfo: Record<
     string,
@@ -15,26 +21,38 @@ export default function Navbar() {
   > = {
 
     "/beranda": {
-      title: "Beranda",
-      subtitle: getCurrentSession(),
+      title: "ICU-Q Dashboard",
+      subtitle: sessionText,
     },
 
 
     "/monitoring": {
       title: "ICU Monitoring",
-      subtitle: getCurrentSession(),
+      subtitle: sessionText,
     },
 
 
     "/pasien": {
-      title: "Daftar Pasien ICU",
-      subtitle: getCurrentSession(),
+      title: "ICU Patient List",
+      subtitle: sessionText,
     },
 
 
     "/tambahpasien": {
-      title: "Pendaftaran Pasien ICU",
-      subtitle: getCurrentSession(),
+      title: "ICU Patient Registration",
+      subtitle: sessionText,
+    },
+
+
+    "/antrean": {
+      title: "ICU Queue",
+      subtitle: sessionText,
+    },
+
+
+    "/riwayat": {
+      title: "Patient History",
+      subtitle: sessionText,
     },
 
 
@@ -44,8 +62,8 @@ export default function Navbar() {
   const current =
     pageInfo[pathname] ??
     {
-      title: "SIMRS ICU",
-      subtitle: getCurrentSession(),
+      title: "ICU-Q",
+      subtitle: sessionText,
     };
 
 
@@ -86,7 +104,7 @@ export default function Navbar() {
           <FiSettings />
 
           <span className="font-medium">
-            Sistem Aktif
+            System Active
           </span>
 
         </div>
@@ -126,7 +144,7 @@ function getCurrentSession() {
   const now = new Date();
 
 
-  const date = now.toLocaleDateString("id-ID", {
+  const date = now.toLocaleDateString("en-US", {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -137,16 +155,16 @@ function getCurrentSession() {
   const hour = now.getHours();
 
 
-  let session = "Sesi Pagi";
+  let session = "Morning Shift";
 
 
   if (hour >= 12 && hour < 17) {
 
-    session = "Sesi Siang";
+    session = "Afternoon Shift";
 
   } else if (hour >= 17) {
 
-    session = "Sesi Malam";
+    session = "Night Shift";
 
   }
 

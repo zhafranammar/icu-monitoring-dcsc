@@ -1,14 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaBars } from "react-icons/fa";
 import { CiGrid41 } from "react-icons/ci";
-import { HiOutlineTrendingUp } from "react-icons/hi";
 import { MdQueue } from "react-icons/md";
 import { FaFileMedicalAlt } from "react-icons/fa";
 import { FaUserClock } from "react-icons/fa";
-import { FaHeartbeat } from "react-icons/fa";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -18,24 +17,24 @@ type SidebarProps = {
 const navItems = [
   { 
     href: "/beranda", 
-    label: "Dashboard ICU", 
+    label: "ICU-Q Dashboard", 
     icon: <CiGrid41 size={20} /> 
   },
 
   { 
     href: "/tambahpasien", 
-    label: "Pendaftaran Pasien", 
+    label: "Patient Registration", 
     icon: <MdQueue size={18} /> 
   },
 
   { 
     href: "/antrean", 
-    label: "Antrean ICU", 
+    label: "ICU Queue", 
     icon: <FaUserClock size={20} /> 
   },
   { 
     href: "/riwayat", 
-    label: "Riwayat Pasien", 
+    label: "Patient History", 
     icon: <FaFileMedicalAlt size={20} /> 
   },
 ];
@@ -54,18 +53,23 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         <div className="flex items-center justify-between px-4 py-4">
   {isOpen ? (
     <div className="flex items-center gap-3">
-      {/* Logo */}
-      <div className="bg-blue-600 p-2.5 rounded-xl flex items-center justify-center">
-        <FaHeartbeat className="w-6 h-6 text-white" />
+      <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+        <Image
+          src="/icuq.png"
+          alt="ICU-Q logo"
+          width={34}
+          height={34}
+          className="h-8 w-8 scale-125 object-contain"
+          priority
+        />
       </div>
 
-      {/* Judul */}
       <div>
         <h1 className="text-lg font-bold text-blue-900">
-          SIMRS ICU
+          ICU-Q
         </h1>
         <p className="text-[10px] text-gray-600">
-          Sistem Informasi Rumah Sakit
+          ICU Queue Intelligence
         </p>
       </div>
     </div>
@@ -115,7 +119,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         {/* Footer */}
         {isOpen && (
           <div className="px-4 py-3">
-            <p className="text-xs text-slate-400">Manajemen Informasi Biomedis v1.0 — Prototipe</p>
+            <p className="text-xs text-slate-400">ICU-Q v1.0 Prototype</p>
           </div>
         )}
       </aside>
