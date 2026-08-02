@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 import { FaBars } from "react-icons/fa";
 import { CiGrid41 } from "react-icons/ci";
 import { HiOutlineTrendingUp } from "react-icons/hi";
-
-import { TfiListOl } from "react-icons/tfi";
-
+import { MdQueue } from "react-icons/md";
+import { FaFileMedicalAlt } from "react-icons/fa";
+import { FaUserClock } from "react-icons/fa";
 import { FaHeartbeat } from "react-icons/fa";
 
 type SidebarProps = {
@@ -25,18 +25,18 @@ const navItems = [
   { 
     href: "/tambahpasien", 
     label: "Pendaftaran Pasien", 
-    icon: <TfiListOl size={18} /> 
+    icon: <MdQueue size={18} /> 
   },
 
   { 
     href: "/antrean", 
     label: "Antrean ICU", 
-    icon: <HiOutlineTrendingUp size={20} /> 
+    icon: <FaUserClock size={20} /> 
   },
   { 
     href: "/riwayat", 
     label: "Riwayat Pasien", 
-    icon: <HiOutlineTrendingUp size={20} /> 
+    icon: <FaFileMedicalAlt size={20} /> 
   },
 ];
 
@@ -46,23 +46,23 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   return (
     <>
       <aside
-        className={`fixed top-0 left-0 h-screen bg-white text-green-700 transition-all duration-300 z-50 flex flex-col shadow-2xl ${
-          isOpen ? "w-64" : "w-20"
-        }`}
-      >
+    className={`fixed top-0 left-0 h-screen bg-white text-blue-700 transition-all duration-300 z-50 flex flex-col shadow-2xl ${
+    isOpen ? "w-64" : "w-20"
+  }`}
+>
         {/* Logo */}
         <div className="flex items-center justify-between px-4 py-4">
   {isOpen ? (
     <div className="flex items-center gap-3">
       {/* Logo */}
-      <div className="bg-emerald-600 p-2.5 rounded-xl flex items-center justify-center">
+      <div className="bg-blue-600 p-2.5 rounded-xl flex items-center justify-center">
         <FaHeartbeat className="w-6 h-6 text-white" />
       </div>
 
       {/* Judul */}
       <div>
-        <h1 className="text-lg font-bold text-black">
-          SIRS UGM
+        <h1 className="text-lg font-bold text-blue-900">
+          SIMRS ICU
         </h1>
         <p className="text-[10px] text-gray-600">
           Sistem Informasi Rumah Sakit
@@ -75,7 +75,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
 
   <button
     onClick={() => setIsOpen(!isOpen)}
-    className="p-2 rounded-lg hover:bg-green-200 transition"
+    className="p-2 rounded-lg hover:bg-blue-100 transition text-blue-700"
     title="Toggle sidebar"
   >
     <FaBars size={16} />
@@ -91,13 +91,15 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 key={item.href}
                 href={item.href}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 ${
-                  isActive
-                    ? "bg-green-300 shadow-lg scale-105"
-                    : "text-gray-600 hover:bg-green-300/50 hover:text-green-600"
-                }`}
+  isActive
+    ? "bg-blue-100 text-blue-700 shadow-md scale-105 border-r-4 border-blue-600"
+    : "text-slate-600 hover:bg-blue-50 hover:text-blue-600"
+}`}
                 title={!isOpen ? item.label : undefined}
               >
-                <span className="shrink-0">{item.icon}</span>
+                <span className="shrink-0 text-blue-600">
+  {item.icon}
+</span>
                 <span
                   className={`text-sm font-medium whitespace-nowrap transition-all duration-300 ${
                     isOpen ? "opacity-100 w-auto" : "opacity-0 w-0 overflow-hidden"
@@ -113,7 +115,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         {/* Footer */}
         {isOpen && (
           <div className="px-4 py-3">
-            <p className="text-xs text-blue-400">Manajemen Informasi Biomedis v1.0 — Prototipe</p>
+            <p className="text-xs text-slate-400">Manajemen Informasi Biomedis v1.0 — Prototipe</p>
           </div>
         )}
       </aside>
